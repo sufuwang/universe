@@ -1,26 +1,20 @@
-FROM node:18.0-alpine3.14 as build-stage
-
+FROM node:latest as install-stage
 WORKDIR /app
+COPY ./package.json .
+COPY ./pnpm-lock.yaml .
+RUN npm i -g pnpm
+RUN pnpm -v
+RUN pnpm i
 
-COPY package.json .
-
-RUN npm install
-
-COPY . .
-
+FROM node:latest as build-stage
+WORKDIR /app
+COPY . /app
+COPY --from=install-stage /app/node_modules /app/node_modules
 RUN npm run build
 
-# production stage
-FROM node:18.0-alpine3.14 as production-stage
-
+FROM node:latest as production-stage
 COPY --from=build-stage /app/dist /app
 COPY --from=build-stage /app/publics /app/publics
-COPY --from=build-stage /app/package.json /app/package.json
-
-WORKDIR /app
-
-RUN npm install
-
+COPY --from=build-stage /app/node_modules /app/node_modules
 EXPOSE 3000
-
 CMD ["node", "/app/main.js"]
