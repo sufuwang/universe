@@ -21,19 +21,19 @@ export class ImageFeedEntity {
     length: 50,
     comment: '标签',
   })
-  tag: string;
+  tags: string;
 
   @Column({
     length: 200,
     comment: '图片集',
   })
-  image: string;
+  images: string;
 
   @Column({
-    length: 1000,
+    length: 10000,
     comment: '描述',
   })
-  desc: string;
+  content: string;
 
   @Column({
     default: 0,

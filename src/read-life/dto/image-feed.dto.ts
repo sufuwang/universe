@@ -5,11 +5,11 @@ export class ImageFeedDto {
   title: string;
 
   @IsNotEmpty()
-  tag: string[];
+  tags: string[];
 
   @IsNotEmpty()
-  image: string[];
+  images: string[];
 
   @IsNotEmpty()
-  desc: string;
+  content: string;
 }

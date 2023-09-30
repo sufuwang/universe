@@ -20,6 +20,16 @@ export class ReadLifeController {
     return this.service.getViewCount(id);
   }
 
+  @Patch('/viewCount')
+  async addViewCount(@Query('id') id: number) {
+    return this.service.addViewCount(id);
+  }
+
+  @Get('/tags')
+  async getAllTag() {
+    return this.service.getAllTag();
+  }
+
   @Get('/feed')
   async getFeed(@Query('id') id: number) {
     return this.service.getFeed(id);
