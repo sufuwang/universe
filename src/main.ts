@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
   // app.useStaticAssets('/Users/sufuwang/Downloads/Code/universe/publics', {
-  app.useStaticAssets('./publics', {
+  app.useStaticAssets('/app/publics', {
     prefix: '/public',
   });
   await app.listen(3000);
